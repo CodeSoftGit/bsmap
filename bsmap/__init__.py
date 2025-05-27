@@ -17,7 +17,7 @@ Common Errors:
 """
 
 # Version info
-__version__ = "1.0.0"
+__version__ = "1.1.1"
 __author__ = "CodeSoftGit"
 
 # Core models
