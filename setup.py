@@ -5,7 +5,8 @@ setup(
     version="1.0.0",
     author="CodeSoftGit",
     description="Beat Saber Mapping Framework",
-    long_description="A comprehensive framework for creating, editing, and validating Beat Saber maps.",
+    long_description=open("README.md").read(),
+    long_description_content_type="text/markdown",
     url="https://github.com/CodeSoftGit/bsmap",
     packages=find_packages(),
     install_requires=[
