@@ -1,5 +1,7 @@
 # Beat Saber Mapping Framework (bsmap)
 
+> **⚠️ Warning:** When loading beatmaps, bsmap will attempt to convert them to v3 if not already. Try to make all maps in v3 to avoid data loss!
+
 ## Table of Contents
 
 1. [Introduction](#1-introduction)
