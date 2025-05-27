@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="bsmap",
-    version="1.1.1",
+    version="1.1.2",
     author="CodeSoftGit",
     description="Beat Saber Mapping Framework",
     long_description=open("README.md", encoding="utf-8").read(),
