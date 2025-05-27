@@ -14,6 +14,8 @@ from .models import (
 )
 from .custom_data import Settings
 
+from bstokenizer.mapconvert import convert
+
 class BeatSaberMapper:
     """Main class for working with Beat Saber maps"""
     
@@ -112,7 +114,13 @@ class BeatSaberMapper:
             for beatmap in beatmap_set.difficultyBeatmaps:
                 beatmap_path = folder_path / beatmap.beatmapFilename
                 if beatmap_path.exists():
-                    beatmaps[beatmap.beatmapFilename] = BeatSaberMapper.load_beatmap(str(beatmap_path))
+                    beatmap = BeatSaberMapper.load_beatmap(str(beatmap_path))
+                    # Check if beatmap needs conversion to v3
+                    if not beatmap.version.startswith("3"):
+                        beatmap_data = beatmap.model_dump()
+                        converted_data = convert(beatmap_data, "3")
+                        beatmap = BeatmapFile.model_validate(converted_data)
+                    beatmaps[beatmap.beatmapFilename] = beatmap
                 else:
                     print(f"Warning: Beatmap file {beatmap.beatmapFilename} referenced in Info.dat but not found")
         
