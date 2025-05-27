@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="bsmap",
-    version="1.1.2",
+    version="1.1.3",
     author="CodeSoftGit",
     description="Beat Saber Mapping Framework",
     long_description=open("README.md", encoding="utf-8").read(),
@@ -11,7 +11,7 @@ setup(
     packages=find_packages(),
     install_requires=[
         "pydantic>=2.0", 
-        "bstokenizer>=1.0.0",
+        "bstokenizer>=0.1.0",
     ],
     classifiers=[
         "Programming Language :: Python :: 3",
