@@ -37,14 +37,14 @@ The Beat Saber Mapping Framework is a comprehensive Python library designed to s
 ### Installation via pip
 
 ```bash
-pip install beatsaber-mapping
+pip install bsmap
 ```
 
 ### Manual Installation
 
 ```bash
-git clone https://github.com/CodeSoftGit/beatsaber-mapping.git
-cd beatsaber-mapping
+git clone https://github.com/CodeSoftGit/bsmap.git
+cd bsmap
 pip install -e .
 ```
 
