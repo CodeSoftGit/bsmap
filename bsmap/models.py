@@ -264,22 +264,34 @@ class InfoDat(BaseModel):
 # Beatmap file models
 class BPMEvent(BaseModel):
     """Beat-per-minute change event"""
-    b: float = Field(..., description="Beat time")
-    m: float = Field(..., description="BPM value")
+    b: float = Field(0, description="Beat time")
+    m: float = Field(0, description="BPM value")
+    customData: Optional[Dict[str, Any]] = Field(None, description="Custom data for the BPM event")
+
+    model_config = {
+        "populate_by_name": True,
+        "extra": "allow",
+    }
 
 class RotationEvent(BaseModel):
     """Environment rotation event (for 360/90 degree maps)"""
-    b: float = Field(..., description="Beat time")
-    e: int = Field(..., description="Event type")
-    r: float = Field(..., description="Rotation value in degrees")
+    b: float = Field(0, description="Beat time")
+    e: int = Field(0, description="Event type")
+    r: float = Field(0, description="Rotation value in degrees")
+    customData: Optional[Dict[str, Any]] = Field(None, description="Custom data for the rotation event")
+
+    model_config = {
+        "populate_by_name": True,
+        "extra": "allow",
+    }
 
 class ColorNote(BaseModel):
     """A standard note (red or blue cube)"""
-    b: float = Field(..., description="Beat time")
-    x: int = Field(..., description="X position (0-3)")
-    y: int = Field(..., description="Y position (0-2)")
-    c: int = Field(..., description="Color (0=red, 1=blue)")
-    d: int = Field(..., description="Direction (0-8)")
+    b: float = Field(0, description="Beat time")
+    x: int = Field(0, description="X position (0-3)")
+    y: int = Field(0, description="Y position (0-2)")
+    c: int = Field(0, description="Color (0=red, 1=blue)")
+    d: int = Field(0, description="Direction (0-8)")
     a: int = Field(0, description="Angle offset")
     customData: Optional[Dict[str, Any]] = Field(None, description="Custom data for the note")
 
@@ -297,9 +309,9 @@ class ColorNote(BaseModel):
 
 class BombNote(BaseModel):
     """A bomb note"""
-    b: float = Field(..., description="Beat time")
-    x: int = Field(..., description="X position (0-3)")
-    y: int = Field(..., description="Y position (0-2)")
+    b: float = Field(0, description="Beat time")
+    x: int = Field(0, description="X position (0-3)")
+    y: int = Field(0, description="Y position (0-2)")
     customData: Optional[Dict[str, Any]] = Field(None, description="Custom data for the bomb")
 
     model_config = {
@@ -309,12 +321,12 @@ class BombNote(BaseModel):
 
 class Obstacle(BaseModel):
     """A wall/obstacle"""
-    b: float = Field(..., description="Beat time")
-    d: float = Field(..., description="Duration in beats")
-    x: int = Field(..., description="X position (0-3)")
-    y: int = Field(..., description="Y position (0-2)")
-    w: int = Field(..., description="Width")
-    h: int = Field(..., description="Height")
+    b: float = Field(0, description="Beat time")
+    d: float = Field(0, description="Duration in beats")
+    x: int = Field(0, description="X position (0-3)")
+    y: int = Field(0, description="Y position (0-2)")
+    w: int = Field(0, description="Width")
+    h: int = Field(0, description="Height")
     customData: Optional[Dict[str, Any]] = Field(None, description="Custom data for the obstacle")
 
     model_config = {
@@ -324,18 +336,18 @@ class Obstacle(BaseModel):
 
 class Slider(BaseModel):
     """A slider note (chain)"""
-    c: int = Field(..., description="Color (0=red, 1=blue)")
-    b: float = Field(..., description="Beat time")
-    x: int = Field(..., description="X position (0-3)")
-    y: int = Field(..., description="Y position (0-2)")
-    d: int = Field(..., description="Direction (0-8)")
-    mu: float = Field(..., description="Multiplier")
-    tb: float = Field(..., description="Tail beat")
-    tx: int = Field(..., description="Tail X position")
-    ty: int = Field(..., description="Tail Y position")
-    tc: int = Field(..., description="Tail color")
-    tmu: float = Field(..., description="Tail multiplier")
-    m: int = Field(..., description="Slider type")
+    b: float = Field(0, description="Beat time")
+    c: int = Field(0, description="Color (0=red, 1=blue)")
+    x: int = Field(0, description="X position (0-3)")
+    y: int = Field(0, description="Y position (0-2)")
+    d: int = Field(0, description="Direction (0-8)")
+    mu: float = Field(0.0, description="Multiplier")
+    tb: float = Field(0, description="Tail beat")
+    tx: int = Field(0, description="Tail X position")
+    ty: int = Field(0, description="Tail Y position")
+    tc: int = Field(0, description="Tail color")
+    tmu: float = Field(0.0, description="Tail multiplier")
+    m: int = Field(0, description="Slider type")
     customData: Optional[Dict[str, Any]] = Field(None, description="Custom data for the slider")
 
     model_config = {
@@ -345,16 +357,16 @@ class Slider(BaseModel):
 
 class BurstSlider(BaseModel):
     """A burst slider note (arc)"""
-    c: int = Field(..., description="Color (0=red, 1=blue)")
-    b: float = Field(..., description="Beat time")
-    x: int = Field(..., description="X position (0-3)")
-    y: int = Field(..., description="Y position (0-2)")
-    d: int = Field(..., description="Direction (0-8)")
-    tb: float = Field(..., description="Tail beat")
-    tx: int = Field(..., description="Tail X position")
-    ty: int = Field(..., description="Tail Y position")
-    sc: int = Field(..., description="Slice count")
-    s: float = Field(..., description="Squish factor")
+    b: float = Field(0, description="Beat time")
+    c: int = Field(0, description="Color (0=red, 1=blue)")
+    x: int = Field(0, description="X position (0-3)")
+    y: int = Field(0, description="Y position (0-2)")
+    d: int = Field(0, description="Direction (0-8)")
+    tb: float = Field(0, description="Tail beat")
+    tx: int = Field(0, description="Tail X position")
+    ty: int = Field(0, description="Tail Y position")
+    sc: int = Field(0, description="Slice count")
+    s: float = Field(0.0, description="Squish factor")
     customData: Optional[Dict[str, Any]] = Field(None, description="Custom data for the burst slider")
 
     model_config = {
@@ -364,10 +376,10 @@ class BurstSlider(BaseModel):
 
 class BasicBeatmapEvent(BaseModel):
     """A basic lighting/environment event"""
-    b: float = Field(..., description="Beat time")
-    et: int = Field(..., description="Event type")
-    i: int = Field(..., description="Index")
-    f: float = Field(..., description="Float value")
+    b: float = Field(0, description="Beat time")
+    et: Optional[int] = Field(0, description="Event type")
+    i: Optional[int] = Field(0, description="Index", )
+    f: Optional[float] = Field(0.0, description="Float value")
     customData: Optional[Dict[str, Any]] = Field(None, description="Custom data for the event")
 
     model_config = {
@@ -377,8 +389,8 @@ class BasicBeatmapEvent(BaseModel):
 
 class ColorBoostBeatmapEvent(BaseModel):
     """Color boost event (lighting boost effect)"""
-    b: float = Field(..., description="Beat time")
-    o: bool = Field(..., description="On/off")
+    b: float = Field(0, description="Beat time")
+    o: Optional[bool] = Field(False, description="On/off")
     customData: Optional[Dict[str, Any]] = Field(None, description="Custom data for the event")
 
     model_config = {
@@ -388,10 +400,10 @@ class ColorBoostBeatmapEvent(BaseModel):
 
 class Waypoint(BaseModel):
     """Player movement waypoint for 360/90 degree maps"""
-    b: float = Field(..., description="Beat time")
-    x: int = Field(..., description="X position")
-    y: int = Field(..., description="Y position")
-    d: int = Field(..., description="Direction")
+    b: float = Field(0, description="Beat time")
+    x: int = Field(0, description="X position")
+    y: int = Field(0, description="Y position")
+    d: int = Field(0, description="Direction")
     customData: Optional[Dict[str, Any]] = Field(None, description="Custom data for the waypoint")
 
     model_config = {
@@ -422,7 +434,7 @@ class CustomEvent(BaseModel):
 
 class BeatmapFile(BaseModel):
     """Represents a Beat Saber beatmap file (e.g., Expert.dat)"""
-    version: str = Field(..., description="Version of the beatmap format")
+    version: str = Field(..., alias="_version", description="Version of the beatmap format")
     bpmEvents: List[BPMEvent] = Field(default_factory=list, description="BPM events")
     rotationEvents: List[RotationEvent] = Field(default_factory=list, description="Rotation events")
     colorNotes: List[ColorNote] = Field(default_factory=list, description="Color notes")

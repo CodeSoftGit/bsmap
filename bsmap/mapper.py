@@ -16,10 +16,6 @@ from .custom_data import Settings
 
 from bstokenizer.mapconvert import convert
 
-import json
-
-import os
-
 class BeatSaberMapper:
     """Main class for working with Beat Saber maps"""
     
@@ -121,9 +117,7 @@ class BeatSaberMapper:
                     
                     beatmap = BeatSaberMapper.load_beatmap(str(beatmap_path))
                     # Check if beatmap needs conversion to v3
-                    with open(beatmap_path, 'r') as f:
-                        beatmap_json = json.load(f)
-                    if not beatmap_json.get("version", "0").startswith("3"):
+                    if not beatmap.version.startswith("3"):
                         beatmap_data = beatmap.model_dump()
                         converted_data = convert(beatmap_data, "3")
                         beatmap = BeatmapFile.model_validate(converted_data)
